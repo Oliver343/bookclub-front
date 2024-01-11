@@ -32,6 +32,7 @@
   <br />
 
   <button @click="addEntry">Add Book</button>
+  <button @click="delAll">Delete All</button>
 </template>
 
 <script>
@@ -57,6 +58,21 @@ export default {
       try {
         const { data } = await axios.post(
           "http://127.0.0.1:8000/add/",
+          {
+            Title: this.title,
+            Description: this.description,
+            Image: this.image,
+          }
+        );
+        this.post = data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async delAll() {
+      try {
+        const { data } = await axios.delete(
+          "http://127.0.0.1:8000/del/",
           {
             Title: this.title,
             Description: this.description,
